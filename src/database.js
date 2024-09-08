@@ -2,18 +2,10 @@ import mysql from 'mysql2/promise';
 
 const env = process.env;
 
-const access = {
-  user: env.DB_USER,
-  password: env.DB_PASSWORD,
-  database: env.DB_NAME,
-  host: env.DB_HOST,
-  port: env.DB_PORT,
-};
-
 let db;
 
 (async () => {
-  db = await mysql.createConnection(access);
+  db = await mysql.createConnection(env.DB_STRING);
 })();
 
 export { db };
