@@ -15,4 +15,8 @@ services:
       - "10002:3000"
     restart: unless-stopped
     networks:
-      - ${NETWORK_NAME}
+      - dev_dev-mysql.ricr.dev
+      
+networks:
+  dev_dev-mysql.ricr.dev:
+    external: true
