@@ -1,0 +1,16 @@
+services:
+  keylogger-api:
+    image: ricdotnet/keylogger-api:latest
+    container_name: keylogger-api
+    environment:
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "10002:3000"
+    restart: unless-stopped
