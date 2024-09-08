@@ -1,5 +1,7 @@
 FROM node:20 as build
 
+LABEL org.opencontainers.image.source="https://github.com/ricdotnet/keylogger-api"
+
 WORKDIR /app
 
 COPY ./.yarnrc.yml /app/.yarnrc.yml
