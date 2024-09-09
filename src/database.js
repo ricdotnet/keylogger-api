@@ -8,12 +8,9 @@ const access = {
   database: env.DB_NAME,
   host: env.DB_HOST,
   port: env.DB_PORT,
+  connectionLimit: 5,
 };
 
-let db;
-
-(async () => {
-  db = await mysql.createConnection(access);
-})();
+const db = mysql.createPool(access);
 
 export { db };

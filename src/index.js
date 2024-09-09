@@ -6,8 +6,9 @@ RicApi()
   .get('/stats', async (ctx) => {
     let rows;
     
-    try { 
-      const preparedStatement = await db.prepare('SELECT * FROM events');
+    try {
+      const connection = await db.getConnection();
+      const preparedStatement = await connection.prepare('SELECT * FROM events');
       [rows] = await preparedStatement.execute();
     } catch (error) {
       console.error('Error inserting data into database', error);
@@ -20,8 +21,9 @@ RicApi()
   .post('/stats', async (ctx) => {
     const { keyboardClicks, mouseLeftClicks, mouseRightClicks, mouseScroll } = snakeToCamel(ctx.body());
     
-    try { 
-      const preparedStatement = await db.prepare('INSERT INTO events (keyboard_clicks, mouse_scroll, mouse_left_click, mouse_right_click) VALUES (?, ?, ?, ?)');
+    try {
+      const connection = await db.getConnection();
+      const preparedStatement = await connection.prepare('INSERT INTO events (keyboard_clicks, mouse_scroll, mouse_left_click, mouse_right_click) VALUES (?, ?, ?, ?)');
       await preparedStatement.execute([keyboardClicks, mouseScroll, mouseLeftClicks, mouseRightClicks]);
     } catch (error) {
       console.error('Error inserting data into database', error);
