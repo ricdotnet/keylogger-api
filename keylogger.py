@@ -49,7 +49,7 @@ def push_current():
 thread = threading.Thread(target=push_current)
 thread.start()
 
-def on_press(key):
+def on_release(key):
     global current_clicks
     current_clicks += 1
     # print('Current clicks: {}'.format(current_clicks))
@@ -67,7 +67,7 @@ def on_scroll(x, y, dx, dy):
     mouse_scroll += 3
     # print('Scrolls: {}'.format(mouse_scroll))
     
-keyboard_listener = keyboard.Listener(on_press=on_press)
+keyboard_listener = keyboard.Listener(on_release=on_release)
 mouse_listener = mouse.Listener(on_click=on_click, on_scroll=on_scroll)
 
 keyboard_listener.start()
