@@ -6,6 +6,8 @@ RicApi()
   .get('/stats', async (ctx) => {
     let rows;
     
+    console.log('GET /stats', new Date());
+    
     try {
       const connection = await db.getConnection();
       const preparedStatement = await connection.prepare('SELECT * FROM events');
@@ -20,7 +22,9 @@ RicApi()
   })
   .post('/stats', async (ctx) => {
     const { keyboardClicks, mouseLeftClicks, mouseRightClicks, mouseScroll } = snakeToCamel(ctx.body());
-    
+
+    console.log('POST /stats', new Date(), ctx.body());
+
     try {
       const connection = await db.getConnection();
       const preparedStatement = await connection.prepare('INSERT INTO events (keyboard_clicks, mouse_scroll, mouse_left_click, mouse_right_click) VALUES (?, ?, ?, ?)');
