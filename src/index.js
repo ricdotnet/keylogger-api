@@ -39,10 +39,6 @@ RicApi()
 
     ctx.statusCode = HttpStatusCode.CREATED;
   })
-  .notFound((ctx) => {
-    ctx.statusCode = HttpStatusCode.NOT_FOUND;
-    ctx.response({ message: 'Not found' });
-  })
   .start(3000);
   
 function reduceRows(rows) {
