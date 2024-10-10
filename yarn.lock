@@ -5,10 +5,10 @@ __metadata:
   version: 8
   cacheKey: 10c0
 
-"@ricdotnet/api@npm:^0.0.3":
-  version: 0.0.3
-  resolution: "@ricdotnet/api@npm:0.0.3"
-  checksum: 10c0/6a6d312df3dec2bea151852513d723089718ada3cdeeae4b5b786634ee3e5eaa40f316a563c71c2a32eed3bfbc6f4cf9a2bc86f2c7549a69fb84a5226b4a729b
+"@ricdotnet/api@npm:^0.2.5":
+  version: 0.2.5
+  resolution: "@ricdotnet/api@npm:0.2.5"
+  checksum: 10c0/f196e657309fb49c1d2d152e4fe8d14f055c055d921295dccbf228c77f15f1a84fa778ea120c77b5b2d9caacf0799ea677fa5f39b81b4a93f583b9b7fbabb586
   languageName: node
   linkType: hard
 
@@ -16,7 +16,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "api@workspace:."
   dependencies:
-    "@ricdotnet/api": "npm:^0.0.3"
+    "@ricdotnet/api": "npm:^0.2.5"
     mysql2: "npm:^3.11.0"
   languageName: unknown
   linkType: soft

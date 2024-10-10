@@ -1,6 +1,6 @@
-import { RicApi } from '@ricdotnet/api/dist/index.js'
+import { RicApi } from '@ricdotnet/api'
 import { db } from './database.js';
-import { HttpStatusCode } from '@ricdotnet/api/dist/errors/HttpStatusCodes.js';
+import { HttpStatusCode } from '@ricdotnet/api/src/errors/HttpStatusCodes.js';
 
 RicApi()
   .get('/stats', async (ctx) => {
@@ -19,14 +19,12 @@ RicApi()
 
     connection.release();
     
-    ctx.setHeader('Content-Type', 'application/json');
     ctx.response(reduceRows(rows));
-    ctx.send();
   })
   .post('/stats', async (ctx) => {
-    const { keyboardClicks, mouseLeftClicks, mouseRightClicks, mouseScroll } = snakeToCamel(ctx.body());
+    const { keyboardClicks, mouseLeftClicks, mouseRightClicks, mouseScroll } = snakeToCamel(ctx.body);
 
-    console.log('POST /stats', new Date(), ctx.body());
+    console.log('POST /stats', new Date(), ctx.body);
 
     let connection;
     try {
@@ -39,13 +37,11 @@ RicApi()
 
     connection.release();
 
-    ctx.response(null, HttpStatusCode.CREATED);
-    ctx.send();
+    ctx.statusCode = HttpStatusCode.CREATED;
   })
   .notFound((ctx) => {
-    ctx.setHeader('Content-Type', 'application/json');
-    ctx.response({ message: 'Not found' }, 404);
-    ctx.send();
+    ctx.statusCode = HttpStatusCode.NOT_FOUND;
+    ctx.response({ message: 'Not found' });
   })
   .start(3000);
   
@@ -62,7 +58,8 @@ function reduceRows(rows) {
   
 function snakeToCamel(obj) {
   return Object.keys(obj).reduce((acc, key) => {
-    const newKey = key.replace(/_([a-z])/g, (match, char) => char.toUpperCase());
-    return { ...acc, [newKey]: obj[key] };
+    const newKey = key.replace(/_([a-z])/g, (_, char) => char.toUpperCase());
+    acc[newKey] = obj[key];
+    return acc;
   }, {});
 }

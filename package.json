@@ -7,7 +7,7 @@
     "start": "node --env-file=.env src/index.js"
   },
   "dependencies": {
-    "@ricdotnet/api": "^0.0.3",
+    "@ricdotnet/api": "^0.2.5",
     "mysql2": "^3.11.0"
   }
 }
